@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Comvita US Targeting Plan</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Familjen+Grotesk:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: single reading column (max 1120px), sections stacked plan-order: overview → personas → geography → priority matrix → line items */
+:root{
+  --bg:#F4F5F1; --surface:#FFFFFF; --ink:#1B231F; --muted:#5F6862; --line:#DCDFD7;
+  --honey:#B8720F; --honey-soft:#F6E7CC; --bush:#2C5A44; --bush-soft:#DCE8E0;
+  --p1:#B8720F; --p2:#2C5A44; --p3:#7A5A9A; --p4:#3F7A9A; --p5:#8B8F6A;
+  --display:"Familjen Grotesk","Helvetica Neue",Arial,sans-serif;
+  --body:"IBM Plex Sans","Segoe UI",system-ui,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111512; --surface:#181D1A; --ink:#E9ECE6; --muted:#9BA39D; --line:#2B322D;
+  --honey:#E3A443; --honey-soft:#3A2C14; --bush:#82B89B; --bush-soft:#1E2E25;
+  --p1:#E3A443; --p2:#82B89B; --p3:#B39AD0; --p4:#7FB6D4; --p5:#BFC39A; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111512; --surface:#181D1A; --ink:#E9ECE6; --muted:#9BA39D; --line:#2B322D;
+  --honey:#E3A443; --honey-soft:#3A2C14; --bush:#82B89B; --bush-soft:#1E2E25;
+  --p1:#E3A443; --p2:#82B89B; --p3:#B39AD0; --p4:#7FB6D4; --p5:#BFC39A; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font:15px/1.6 var(--body);margin:0}
+.wrap{max-width:1120px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+h1,h2,h3{font-family:var(--display);text-wrap:balance;margin:0;line-height:1.1}
+.eyebrow{font:500 12px/1 var(--mono);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.num{font-variant-numeric:tabular-nums}
+
+/* header */
+header.hero{border-bottom:1px solid var(--line);position:relative;overflow:hidden}
+header.hero::after{content:"";position:absolute;right:-40px;top:-20px;width:380px;height:320px;opacity:.5;pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='97' viewBox='0 0 56 97'%3E%3Cpath d='M28 1 55 16.5v31L28 63 1 47.5v-31z M28 63v34' fill='none' stroke='%23B8720F' stroke-opacity='.35' stroke-width='1'/%3E%3C/svg%3E");
+  -webkit-mask-image:radial-gradient(closest-side,#000,transparent);mask-image:radial-gradient(closest-side,#000,transparent)}
+.hero .wrap{padding-block:56px 40px;position:relative;z-index:1}
+.byline{display:flex;flex-wrap:wrap;gap:8px 20px;align-items:center}
+.hero h1{font-size:clamp(34px,5.6vw,60px);font-weight:700;letter-spacing:-.02em;margin-top:20px;max-width:16ch}
+.hero h1 em{font-style:normal;color:var(--honey)}
+.hero p.lede{font-size:17px;color:var(--muted);max-width:60ch;margin:18px 0 0}
+.stats{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:0;margin-top:40px;border-top:1px solid var(--line)}
+.stat{padding:16px 16px 0 0}
+.stat+.stat{padding-left:16px;border-left:1px solid var(--line)}
+.stat b{display:block;font:600 clamp(24px,3.2vw,34px)/1.1 var(--display);font-variant-numeric:tabular-nums}
+.stat span{font-size:13px;color:var(--muted)}
+@media (max-width:720px){.stats{grid-template-columns:repeat(2,minmax(0,1fr))}.stat:last-child{grid-column:1/-1}.stat,.stat+.stat{padding:14px 12px 12px 0;border-left:0;border-bottom:1px solid var(--line)}}
+
+nav.toc{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav.toc .wrap{display:flex;gap:4px 22px;overflow-x:auto;padding-block:12px;scrollbar-width:none}
+nav.toc a{font:500 13px var(--body);color:var(--muted);text-decoration:none;white-space:nowrap}
+nav.toc a:hover,nav.toc a:focus-visible{color:var(--ink)}
+
+section{padding-block:64px 8px}
+.sec-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.3fr);gap:12px 48px;align-items:end;margin-bottom:28px}
+.sec-head h2{font-size:clamp(26px,3.4vw,36px);font-weight:600;margin-top:10px}
+.sec-head p{margin:0;color:var(--muted);max-width:60ch}
+@media (max-width:760px){.sec-head{grid-template-columns:1fr}}
+
+/* stacked share bar */
+.sharebar{display:flex;height:44px;border-radius:6px;overflow:hidden;gap:2px}
+.sharebar div{display:flex;align-items:center;padding-left:10px;color:#fff;font:600 13px var(--mono);min-width:0;white-space:nowrap;overflow:hidden}
+.legend-note{font-size:12px;color:var(--muted);margin-top:8px}
+
+/* persona table */
+.ptable{margin-top:28px;border-top:1px solid var(--ink)}
+.prow{display:grid;grid-template-columns:minmax(0,1.3fr) 110px minmax(0,1.3fr) minmax(0,1.3fr);gap:8px 24px;padding:18px 0;border-bottom:1px solid var(--line);align-items:start}
+.prow.head{font:500 11px/1.3 var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);padding:12px 0}
+.prow .pname{font:600 17px/1.3 var(--display);display:flex;gap:10px;align-items:baseline}
+.dot{width:10px;height:10px;border-radius:2px;flex:none;transform:translateY(1px)}
+.prow .amt b{font:600 20px var(--display);font-variant-numeric:tabular-nums}
+.prow .amt span{display:block;font:12px var(--mono);color:var(--muted)}
+.prow .lbl{display:none}
+.prow.total{border-bottom:0;border-top:1px solid var(--ink);margin-top:-1px}
+.prow.total .pname{font-size:15px;text-transform:uppercase;letter-spacing:.04em}
+@media (max-width:760px){.prow{grid-template-columns:1fr auto}.prow.head{display:none}.prow>.c3,.prow>.c4{grid-column:1/-1}.prow .lbl{display:block;font:500 11px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}}
+
+/* regions */
+.regions{display:flex;flex-direction:column;gap:0;border-top:1px solid var(--ink)}
+.reg{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr);gap:10px 32px;padding:20px 0;border-bottom:1px solid var(--line)}
+.reg h3{font-size:18px;font-weight:600}
+.reg .retail{font-size:13px;color:var(--muted);margin-top:4px}
+.bar{display:flex;align-items:center;gap:12px}
+.track{flex:1;height:14px;background:var(--bush-soft);border-radius:3px;overflow:hidden;min-width:0}
+.fill{height:100%;background:var(--bush);border-radius:3px}
+.bar .v{font:600 15px var(--mono);font-variant-numeric:tabular-nums;width:112px;text-align:right;white-space:nowrap;flex:none}
+.metros{display:flex;flex-wrap:wrap;gap:6px;margin-top:12px}
+.metro{font-size:12.5px;padding:3px 9px;border:1px solid var(--line);border-radius:999px;background:var(--surface)}
+.axis{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1.6fr);gap:32px;font:11px var(--mono);color:var(--muted);padding-top:6px}
+.axis .ticks{display:flex;justify-content:space-between;padding-right:124px}
+@media (max-width:760px){.reg,.axis{grid-template-columns:1fr}.axis>span:first-child{display:none}}
+
+/* matrix */
+.matrix-wrap{display:grid;grid-template-columns:minmax(0,1.5fr) minmax(0,1fr);gap:32px;align-items:start}
+@media (max-width:860px){.matrix-wrap{grid-template-columns:1fr}}
+.matrix{display:grid;grid-template-columns:28px repeat(3,minmax(0,1fr));grid-template-rows:repeat(3,minmax(96px,auto)) 34px;gap:4px}
+.ylab{grid-row:1/4;writing-mode:vertical-rl;transform:rotate(180deg);font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:center}
+.cell{background:var(--surface);border:1px solid var(--line);border-radius:4px;padding:8px;display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;position:relative}
+.cell .coord{position:absolute;right:6px;bottom:4px;font:10px var(--mono);color:var(--muted)}
+.cell.hot{background:var(--honey-soft);border-color:color-mix(in srgb,var(--honey) 40%,var(--line))}
+.xlab{grid-column:2/5;display:flex;justify-content:space-between;align-items:center;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.li-chip{font:600 12px var(--mono);padding:4px 7px;border-radius:4px;color:#fff;border:0;cursor:pointer;line-height:1.2}
+.li-chip:focus-visible{outline:2px solid var(--ink);outline-offset:2px}
+.mkey{display:flex;flex-direction:column;gap:10px;font-size:14px}
+.mkey p{margin:0;color:var(--muted)}
+.mkey ul{list-style:none;padding:0;margin:4px 0 0;display:flex;flex-direction:column;gap:8px}
+.mkey li{display:flex;gap:10px;align-items:baseline}
+
+/* line items */
+.filters{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.filters button{font:500 13px var(--body);padding:7px 13px;border-radius:999px;border:1px solid var(--line);background:var(--surface);color:var(--ink);cursor:pointer}
+.filters button[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+.filters button:focus-visible{outline:2px solid var(--honey);outline-offset:2px}
+.items{display:flex;flex-direction:column;gap:10px;padding-bottom:40px}
+details.li{background:var(--surface);border:1px solid var(--line);border-radius:6px;scroll-margin-top:70px}
+details.li[open]{border-color:color-mix(in srgb,var(--ink) 30%,var(--line))}
+details.li summary{list-style:none;cursor:pointer;padding:16px 18px;display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:4px 16px;align-items:center}
+details.li summary::-webkit-details-marker{display:none}
+details.li summary:focus-visible{outline:2px solid var(--honey);outline-offset:-2px;border-radius:6px}
+.lino{font:600 22px var(--display);font-variant-numeric:tabular-nums;color:var(--muted)}
+.lititle{font:600 16px/1.3 var(--display)}
+.limeta{display:flex;flex-wrap:wrap;gap:4px 14px;font-size:12.5px;color:var(--muted);margin-top:3px}
+.limeta i{font-style:normal;display:inline-flex;align-items:center;gap:6px}
+.pri{display:flex;gap:6px;font:500 11px var(--mono)}
+.pri span{padding:3px 7px;border-radius:4px;background:var(--bg);border:1px solid var(--line);white-space:nowrap}
+.pri span.top{background:var(--honey-soft);border-color:transparent;color:var(--ink)}
+@media (max-width:640px){details.li summary{grid-template-columns:40px minmax(0,1fr)}.pri{grid-column:2}}
+.libody{padding:4px 18px 20px;border-top:1px solid var(--line)}
+.facts{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px;padding:14px 0;font-size:13px}
+.facts dt{font:500 10.5px var(--mono);letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.facts dd{margin:2px 0 0}
+@media (max-width:640px){.facts{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.seg{margin-top:12px}
+.seg-head{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:8px}
+.seg-head h4{margin:0;font:500 11px var(--mono);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+.copy{font:500 12px var(--body);padding:5px 10px;border-radius:4px;border:1px solid var(--line);background:var(--bg);color:var(--ink);cursor:pointer}
+.copy:focus-visible{outline:2px solid var(--honey);outline-offset:2px}
+.terms{display:flex;flex-wrap:wrap;gap:6px}
+.term{font:13px/1.35 var(--body);padding:4px 9px;border-radius:4px;background:var(--bg);border:1px solid var(--line);overflow-wrap:anywhere}
+.term.url{font:12.5px/1.35 var(--mono)}
+
+footer{border-top:1px solid var(--line);margin-top:40px}
+footer .wrap{padding-block:28px 40px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;font-size:13px;color:var(--muted)}
+@media (prefers-reduced-motion:no-preference){.fill,.sharebar div{transition:width .6s ease}}
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="byline"><span class="eyebrow">Programmatica × Comvita</span><span class="eyebrow">United States · Master media plan</span></div>
+    <h1>Mānuka demand, <em>mapped</em> to the US shopper.</h1>
+    <p class="lede">A $100k full-funnel plan across five personas, five regional footprints and ten line items. Budget follows volume and propensity to purchase, weighted toward the retail footprint where Comvita is stocked.</p>
+    <div class="stats">
+      <div class="stat"><b class="num">$100k</b><span>Total budget</span></div>
+      <div class="stat"><b class="num">5</b><span>Personas</span></div>
+      <div class="stat"><b class="num">5</b><span>Regional footprints</span></div>
+      <div class="stat"><b class="num">10</b><span>Line items</span></div>
+      <div class="stat"><b class="num">~7×</b><span>Frequency target</span></div>
+    </div>
+  </div>
+</header>
+
+<nav class="toc" aria-label="Sections"><div class="wrap">
+  <a href="#personas">Personas &amp; budget</a><a href="#geography">Geography</a><a href="#priority">Volume × propensity</a><a href="#lineitems">Line items</a>
+</div></nav>
+
+<main class="wrap">
+  <section id="personas">
+    <div class="sec-head">
+      <div><span class="eyebrow">Section 1</span><h2>Campaign overview &amp; budget weighting</h2></div>
+      <p>Each persona carries its own objective and KPI. The largest shares go to the groups that bring the most purchase volume: education-led health builders and high-UMF buyers.</p>
+    </div>
+    <div class="sharebar" id="sharebar" role="img" aria-label="Budget share by persona"></div>
+    <div class="legend-note">Share of $100k total budget</div>
+    <div class="ptable" id="ptable"></div>
+  </section>
+
+  <section id="geography">
+    <div class="sec-head">
+      <div><span class="eyebrow">Section 2</span><h2>Geographic weighting &amp; retail footprint</h2></div>
+      <p>Spend is concentrated where Comvita is on shelf: Sprouts, Erewhon, Whole Foods and Costco. A 5% national digital layer acts as the benchmark.</p>
+    </div>
+    <div class="regions" id="regions"></div>
+    <div class="axis"><span></span><div class="ticks"><span>0%</span><span>20%</span><span>40%</span></div></div>
+  </section>
+
+  <section id="priority">
+    <div class="sec-head">
+      <div><span class="eyebrow">Section 3</span><h2>Volume × propensity</h2></div>
+      <p>Every line item is scored on propensity to purchase and on audience volume, each from 1 (top priority) to 3. The top-right cell holds the line items that score highest on both.</p>
+    </div>
+    <div class="matrix-wrap">
+      <div class="matrix" id="matrix"></div>
+      <div class="mkey">
+        <p>Select a line item to open its targeting parameters.</p>
+        <ul id="mkey"></ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="lineitems">
+    <div class="sec-head">
+      <div><span class="eyebrow">Section 4</span><h2>Targeting starting point</h2></div>
+      <p>Ten line items with their keywords, custom affinity URLs, channels and contextual signals. Each list copies as one entry per line, ready to paste into the platform.</p>
+    </div>
+    <div class="filters" id="filters" role="group" aria-label="Filter by persona"></div>
+    <div class="items" id="items"></div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>Prepared by Programmatica for Comvita · US Master Media Plan &amp; Deep Targeting Matrix</span></div></footer>
+
+<script>
+const DATA = {"personas": [{"name": "Natural Health Builders", "share": 0.35, "budget": 35.0, "objective": "Drive Mid-Funnel Consideration & Education", "kpi": "Product Display Page (PDP) Sessions & Return Rate"}, {"name": "Biohackers & Functional Optimizers", "share": 0.25, "budget": 25.0, "objective": "Capture High-Value Superfood Demand", "kpi": "Conversion Rate & High-UMF Unit Volume"}, {"name": "Wellness-Savvy Deal Hunters", "share": 0.2, "budget": 20.0, "objective": "Retail Velocity (Costco & Sprouts)", "kpi": "Store Locator Clicks & Retail Sales Volume"}, {"name": "Proactive Immunity & Seasonal Sufferers", "share": 0.1, "budget": 10.0, "objective": "Capture Seasonal Immunity Demand", "kpi": "Cost Per Acquisition (CPA) on Remedies"}, {"name": "Brand & Category Conquesting", "share": 0.1, "budget": 10.0, "objective": "Conquest Competitor Search & Share of Voice", "kpi": "Search Impression Share & CTR"}], "regions": [{"name": "California & West Coast Metro Hubs", "share": 0.4, "budget": 40.0, "retail": "Sprouts, Erewhon, Costco CA", "metros": ["Los Angeles", "San Francisco", "San Diego", "Seattle"]}, {"name": "Tri-State Metro & Tech Hubs", "share": 0.25, "budget": 25.0, "retail": "Costco East, Whole Foods, Digital", "metros": ["NYC Metro", "Northern NJ", "Connecticut", "Boston", "Austin"]}, {"name": "Costco & Wholesale Footprint Hubs", "share": 0.18, "budget": 18.0, "retail": "Costco Wholesale Footprint States", "metros": ["Midwest & Southeast Regional Costco Footprint"]}, {"name": "Texas & Sunbelt Growth Metros", "share": 0.12, "budget": 12.0, "retail": "Sprouts, Regional Grocers", "metros": ["Dallas", "Houston", "Austin", "Phoenix", "Atlanta"]}, {"name": "Rest of US (Digital Benchmark)", "share": 0.05, "budget": 5.0, "retail": "DTC & Amazon Prime", "metros": ["Nationwide Digital Conquesting & Retargeting Benchmark"]}], "totalP": {"objective": "Full-Funnel Brand & Demand Growth", "kpi": "~7x Frequency Across Target Regions"}, "totalR": {"retail": "Full US Retail & E-Commerce Footprint", "focus": "Geotargeted CPM Efficiency & Frequency Optimization"}, "items": [{"persona": "Natural Health Builders", "name": "Line Item 01 - Gut Health Search Intent", "type": "Google Search Keyword", "prop": 1, "vol": 2, "pshare": 0.35, "region": "California & West Coast Metro Hubs", "rshare": 0.4, "params": "best gut health supplements, natural leaky gut remedies, how to heal leaky gut fast, probiotic alternative natural, pure manuka honey gut health, natural enzymes for digestion, raw honey for stomach ulcers, manuka honey for acid reflux, natural ibs remedies, organic gut health tonic, manuka honey digestion benefits, best natural anti-inflammatory supplements, raw manuka honey 500+ mgo, bioactive honey digestive health, bio-active gut health supplements, holistic gut health remedies, herbal remedies for bloating, natural gut lining repair, prebiotic honey benefits, pure New Zealand manuka honey gut"}, {"persona": "Natural Health Builders", "name": "Line Item 02 - Natural Immunity Search Intent", "type": "Google Search Keyword", "prop": 1, "vol": 2, "pshare": 0.35, "region": "California & West Coast Metro Hubs", "rshare": 0.4, "params": "natural immunity booster supplements, raw propolis tincture benefits, bee propolis throat spray, natural immune support for winter, bio-active propolis extract, natural antibiotic honey, manuka honey cold and flu, antiviral natural supplements, bee propolis immunity benefits, organic immune defense tonic, best natural sore throat remedy, raw manuka honey immunity, bioflavonoids bee propolis, New Zealand propolis extract, natural cold prevention supplements, raw honey antibacterial properties, manuka honey MGO comparison, high UMF manuka honey immunity, natural wellness elixirs, organic bee products immunity"}, {"persona": "Natural Health Builders", "name": "Line Item 03 - Custom Affinity Gut & Wellness Shoppers", "type": "Custom Affinity (Search & URLs)", "prop": 2, "vol": 1, "pshare": 0.35, "region": "California & West Coast Metro Hubs", "rshare": 0.4, "params": "SEARCHES: 'best manuka honey brands', 'wedderspoon vs comvita', 'manuka health honey', 'raw organic honey online', 'gut health supplements review' | URLS: comvita.com, wedderspoon.com, manukahealth.com, kivahealthfood.com, steenshoney.com, newzealandhoneyco.com, seeds.com, ritual.com, athleticgreens.com, moonjuice.com, thrivemarket.com, iherb.com/c/honey, vitacost.com, wholefoodsmarket.com, sprouts.com, erewhonmarket.com, wellnessmama.com, mindbodygreen.com"}, {"persona": "Biohackers & Functional Optimizers", "name": "Line Item 04 - High-UMF / Superfood Search Intent", "type": "Google Search Keyword", "prop": 1, "vol": 3, "pshare": 0.25, "region": "Tri-State Metro (NY/NJ/CT) & Tech Hubs", "rshare": 0.25, "params": "highest MGO manuka honey, UMF 15+ manuka honey benefits, UMF 20+ raw manuka honey, pure bioactive manuka honey, biohacking longevity superfoods, biohacking supplements for gut, propolis bio-active compounds, raw honey pre-workout energy, natural mtor inhibitor supplements, medicinal grade manuka honey, raw royal jelly benefits, bee pollen superfood benefits, high grade manuka honey 800+ MGO, luxury natural superfoods, anti-aging gut health supplements, natural AMPK activators, biohacking immune optimization, raw unpasteurized New Zealand honey, pharmaceutical grade manuka honey"}, {"persona": "Biohackers & Functional Optimizers", "name": "Line Item 05 - Custom Affinity Biohacking & Longevity", "type": "Custom Affinity (Channels & Podcasts)", "prop": 2, "vol": 3, "pshare": 0.25, "region": "Tri-State Metro (NY/NJ/CT) & Tech Hubs", "rshare": 0.25, "params": "CHANNELS & PODCAST URLS: youtube.com/@hubermanlab, youtube.com/@timferriss, youtube.com/@peterattiamd, youtube.com/@foundmyfitness, youtube.com/@bulletproof, youtube.com/@drstephencabral, youtube.com/@markhymanmd, podcast.thetimferrissshow.com, hubermanlab.com, drhyman.com, bulletproof.com, boundlessextraordinary.com, superhumanradio.com, levelhealth.com, lifeextension.com, thorne.com, pureencapsulationspro.com, designsforhealth.com, hyperionherbs.com"}, {"persona": "Biohackers & Functional Optimizers", "name": "Line Item 06 - Contextual Native Superfood Placements", "type": "Contextual / Native Ads", "prop": 2, "vol": 2, "pshare": 0.25, "region": "Tri-State Metro (NY/NJ/CT) & Tech Hubs", "rshare": 0.25, "params": "PLACEMENTS: Forbes Health, NYT Wellbeing, Outside Magazine, MindBodyGreen, Well+Good, Goop, Robb Report | KEYWORDS: 'bioactive honey', 'UMF rating explained', 'MGO vs UMF', 'medicinal honey research', 'bee propolis clinical trials', 'gut microbiome repair', 'longevity nutrition', 'natural anti-inflammatory', 'superfood benefits', 'New Zealand Mānuka science', 'flavonoid rich foods', 'metabolic health supplements', 'raw propolis benefits', 'clean eating superfoods', 'functional medicine gut protocol'"}, {"persona": "Wellness-Savvy Deal Hunters", "name": "Line Item 07 - Wholesale & Club Search Intent", "type": "Google Search & Shopping Keyword", "prop": 1, "vol": 1, "pshare": 0.2, "region": "Costco & Wholesale Footprint Hubs", "rshare": 0.18, "params": "costco manuka honey deals, comvita manuka honey costco price, wholesale manuka honey bulk, costco organic raw honey, sprouts manuka honey sale, sprouts organic honey coupon, bulk raw manuka honey 1kg, costco wellness deals, best price comvita UMF 10+, manuka honey costco item number, organic wholesale grocery deals, costco supplement discounts, sprouts farmers market honey aisle, bulk propolis spray costco, wholesale bee propolis, manuka honey price per oz, cheapest authentic manuka honey, costco manuka honey special buy, organic food wholesale club, sam's club manuka honey"}, {"persona": "Wellness-Savvy Deal Hunters", "name": "Line Item 08 - Custom Affinity Wholesale & Retail Shoppers", "type": "Custom Affinity (Retailer URLs & Apps)", "prop": 1, "vol": 1, "pshare": 0.2, "region": "Costco & Wholesale Footprint Hubs", "rshare": 0.18, "params": "RETAILER URLS & COUPON APPS: costco.com/honey-syrup.html, sprouts.com/specials, same-day.costco.com, instacart.com/costco, instacart.com/sprouts, slickdeals.net, couponcabin.com, retailmenot.com, krazycouponlady.com, hip2save.com, passionatepennypincher.com, costcofooddatabase.com, costcocouponbook.com, organicdealfinder.com, wholefoodsmarket.com/sales-flyer, traderjoes.com, thrivemarket.com/deals, iherb.com/specials, vitacost.com/coupons"}, {"persona": "Proactive Immunity & Seasonal Sufferers", "name": "Line Item 09 - Seasonal Immune & Remedy Search", "type": "Google Search Keyword", "prop": 2, "vol": 2, "pshare": 0.1, "region": "Texas & Sunbelt Growth Metros", "rshare": 0.12, "params": "natural sore throat relief fast, best natural remedy for dry cough, winter immunity booster natural, natural allergy relief honey, raw honey for seasonal allergies, propolis throat spray for singers, natural cold defense for family, manuka honey hot tea remedy, natural soothing throat lozenges, bee propolis sinus relief, natural winter wellness remedies, bioactive honey for cold season, organic throat spray kids, natural respiratory support, raw honey cough suppressant, manuka honey lemon tea benefits, natural remedy for swollen glands, immune boosting warm drinks, bee propolis antibacterial spray, natural flu prevention tips"}, {"persona": "Brand & Category Conquesting", "name": "Line Item 10 - Brand & Competitor Conquest Intent", "type": "Google Search & Custom Intent", "prop": 1, "vol": 3, "pshare": 0.1, "region": "Rest of US (Benchmark Digital)", "rshare": 0.05, "params": "KEYWORDS & URLS: comvita manuka honey, comvita propolis spray, comvita umf 15+, wedderspoon manuka honey, manuka health MGO 400, steens raw manuka honey, kiva manuka honey, new zealand honey co, egarhoney.com, flora manuka honey, pri manuka honey, happy valley manuka honey, wild cape manuka honey, egmont honey, berringa manuka honey, capilano honey, rowse manuka honey, royal nectar manuka, honeygardens.com, savannahbee.com"}]};
+const colors = ['--p1','--p2','--p3','--p4','--p5'];
+const pColor = {}; DATA.personas.forEach((p,i)=>pColor[p.name]=`var(${colors[i]})`);
+const k = v => '$' + (Math.round(v*10)/10) + 'k';
+const pct = v => Math.round(v*100) + '%';
+const esc = s => String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const $ = id => document.getElementById(id);
+
+// Section 1
+$('sharebar').innerHTML = DATA.personas.map(p=>`<div style="width:${p.share*100}%;background:${pColor[p.name]}" title="${esc(p.name)} ${pct(p.share)}">${pct(p.share)}</div>`).join('');
+$('ptable').innerHTML = `<div class="prow head"><span>Persona</span><span>Budget</span><span>Primary objective</span><span>KPI</span></div>` +
+  DATA.personas.map(p=>`<div class="prow"><div class="pname"><span class="dot" style="background:${pColor[p.name]}"></span>${esc(p.name)}</div>
+    <div class="amt"><b>${k(p.budget)}</b><span>${pct(p.share)} share</span></div>
+    <div class="c3"><span class="lbl">Objective</span>${esc(p.objective)}</div><div class="c4"><span class="lbl">KPI</span>${esc(p.kpi)}</div></div>`).join('') +
+  `<div class="prow total"><div class="pname">Total campaign</div><div class="amt"><b>$100k</b><span>100%</span></div>
+   <div class="c3"><span class="lbl">Objective</span>${esc(DATA.totalP.objective)}</div><div class="c4"><span class="lbl">KPI</span>${esc(DATA.totalP.kpi)}</div></div>`;
+
+// Section 2 (bar scale: 0–40%)
+const maxR = 0.4;
+$('regions').innerHTML = DATA.regions.map(r=>`<div class="reg"><div><h3>${esc(r.name)}</h3><div class="retail">${esc(r.retail)}</div></div>
+  <div><div class="bar"><div class="track"><div class="fill" style="width:${r.share/maxR*100}%"></div></div><span class="v">${pct(r.share)} · ${k(r.budget)}</span></div>
+  <div class="metros">${r.metros.map(m=>`<span class="metro">${esc(m)}</span>`).join('')}</div></div></div>`).join('');
+
+// Section 3 matrix: rows propensity 1..3 top→bottom, cols volume 3..1 left→right
+const liNo = it => it.name.match(/Line Item (\d+)/)[1];
+const liShort = it => it.name.replace(/^Line Item \d+ - /,'');
+let m = '<div class="ylab">Propensity to purchase →</div>';
+for (let pr=1; pr<=3; pr++) for (let vo=3; vo>=1; vo--) {
+  const here = DATA.items.filter(i=>i.prop===pr && i.vol===vo);
+  m += `<div class="cell ${pr===1&&vo===1?'hot':''}" style="grid-row:${pr};grid-column:${5-vo}">${here.map(i=>`<button class="li-chip" style="background:${pColor[i.persona]}" data-li="${liNo(i)}" title="${esc(liShort(i))}">LI ${liNo(i)}</button>`).join('')}<span class="coord">P${pr} · V${vo}</span></div>`;
+}
+m += '<div class="xlab"><span>Lower volume</span><span>Audience volume →</span><span>Higher volume</span></div>';
+$('matrix').innerHTML = m;
+$('mkey').innerHTML = DATA.personas.map(p=>`<li><span class="dot" style="background:${pColor[p.name]}"></span><span>${esc(p.name)}</span></li>`).join('');
+
+// Section 4
+function parseParams(s){
+  const segs = s.split(/\s\|\s/);
+  return segs.map(seg=>{
+    const mm = seg.match(/^([A-Z &]+):\s*(.*)$/s);
+    const label = mm ? mm[1].trim() : 'Keywords';
+    const body = mm ? mm[2] : seg;
+    const terms = body.split(/,\s*/).map(t=>t.trim().replace(/^'|'$/g,'')).filter(Boolean);
+    return {label, terms};
+  });
+}
+const isUrl = t => /^[a-z0-9.-]+\.(com|net|org|co)(\/|$)|youtube\.com/i.test(t);
+$('items').innerHTML = DATA.items.map(it=>{
+  const segs = parseParams(it.params);
+  return `<details class="li" id="li-${liNo(it)}" data-persona="${esc(it.persona)}">
+  <summary><span class="lino">${liNo(it)}</span>
+    <div><div class="lititle">${esc(liShort(it))}</div>
+      <div class="limeta"><i><span class="dot" style="background:${pColor[it.persona]}"></span>${esc(it.persona)}</i><i>${esc(it.type)}</i></div></div>
+    <div class="pri"><span class="${it.prop===1?'top':''}">Propensity ${it.prop}</span><span class="${it.vol===1?'top':''}">Volume ${it.vol}</span></div>
+  </summary>
+  <div class="libody">
+    <dl class="facts"><div><dt>Region</dt><dd>${esc(it.region)}</dd></div><div><dt>Regional weighting</dt><dd class="num">${pct(it.rshare)}</dd></div>
+      <div><dt>Persona weighting</dt><dd class="num">${pct(it.pshare)}</dd></div><div><dt>Signals</dt><dd class="num">${segs.reduce((a,s)=>a+s.terms.length,0)}</dd></div></dl>
+    ${segs.map((s,si)=>`<div class="seg"><div class="seg-head"><h4>${esc(s.label)} · ${s.terms.length}</h4><button class="copy" data-copy="${liNo(it)}-${si}">Copy list</button></div>
+      <div class="terms">${s.terms.map(t=>`<span class="term ${isUrl(t)?'url':''}">${esc(t)}</span>`).join('')}</div></div>`).join('')}
+  </div></details>`;
+}).join('');
+const segCache = {}; DATA.items.forEach(it=>parseParams(it.params).forEach((s,si)=>segCache[`${liNo(it)}-${si}`]=s.terms.join('\n')));
+
+document.addEventListener('click', e=>{
+  const c = e.target.closest('.copy');
+  if (c){
+    const txt = segCache[c.dataset.copy];
+    const done = ()=>{c.textContent='Copied'; setTimeout(()=>c.textContent='Copy list',1600);};
+    try { navigator.clipboard.writeText(txt).then(done).catch(()=>fallback(c,txt)); } catch(err){ fallback(c,txt); }
+    return;
+  }
+  const chip = e.target.closest('.li-chip');
+  if (chip){ setFilter('All'); const d = $('li-'+chip.dataset.li); d.open = true; d.scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'}); }
+});
+function fallback(btn,txt){
+  const terms = btn.closest('.seg').querySelector('.terms');
+  const r = document.createRange(); r.selectNodeContents(terms); const s = getSelection(); s.removeAllRanges(); s.addRange(r);
+  btn.textContent='Selected. Press Ctrl+C or ⌘C';
+}
+
+const names = ['All', ...DATA.personas.map(p=>p.name)];
+$('filters').innerHTML = names.map(n=>`<button type="button" data-f="${esc(n)}" aria-pressed="${n==='All'}">${esc(n)}</button>`).join('');
+function setFilter(n){
+  document.querySelectorAll('#filters button').forEach(b=>b.setAttribute('aria-pressed', b.dataset.f===n));
+  document.querySelectorAll('details.li').forEach(d=>d.hidden = !(n==='All' || d.dataset.persona===n));
+}
+$('filters').addEventListener('click', e=>{ const b=e.target.closest('button'); if(b) setFilter(b.dataset.f); });
+</script>
+
+</body>
+</html>
